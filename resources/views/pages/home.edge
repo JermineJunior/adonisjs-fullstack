@@ -32,12 +32,14 @@
                 <span class="text-gray-500 text-sm">{{ post.user.handle }}</span>
                  @if(auth.isAuthenticated && post.user.id === auth.user.id)
                   <div class="flex items-center space-x-2">
-                      <a class="text-gray-500 text-sm hover:text-gray-600" href="#">
+                      <a class="text-gray-500 text-sm hover:text-gray-600" href="{{ `/posts/${post.id}/edit` }}">
                         Edit
                       </a>
-                      <a class="text-gray-500 text-sm hover:text-gray-600" href="#">
-                        delete
-                      </a>
+                      <form action="{{ `/posts/${post.id}?_method=DELETE` }}" method="post">
+                        {{ csrfField() }}
+
+                        <button class="text-gray-500 text-sm hover:text-red-500">Delete</button>
+                      </form>
                     </div>
                     @end
                   </div>
@@ -52,6 +54,14 @@
 
                     <span>11</span>
                   </button>
+                  <div class="flex items-center space-x-1">
+                      @if(post.createdAt.equals(post.updatedAt))
+                      <div class="text-gray-500 text-sm">{{ post.createdAt.toRelative() }}</div>
+                      @else
+                      <div class="text-gray-500 text-sm">Edited</div>
+                      <div class="text-gray-500 text-sm">{{ post.updatedAt.toRelative() }}</div>
+                      @end
+                  </div>
                 </div>
               </div>
 

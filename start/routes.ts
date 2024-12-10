@@ -16,11 +16,23 @@ const RegisterController = () => import('../app/controllers/register_controller.
 
 router.get('/', [FeedController, 'index'])
 //auth routes
-router.get('register', [RegisterController, 'create']).middleware(middleware.guest())
-router.post('register', [RegisterController, 'store']).middleware(middleware.guest())
-router.get('login', [AuthController, 'create']).middleware(middleware.guest())
-router.post('login', [AuthController, 'store']).middleware(middleware.guest())
+router
+  .group(() => {
+    router.get('register', [RegisterController, 'create'])
+    router.post('register', [RegisterController, 'store'])
+    router.get('login', [AuthController, 'create'])
+    router.post('login', [AuthController, 'store'])
+  })
+  .middleware(middleware.guest())
+
 router.delete('logout', [AuthController, 'destroy']).middleware(middleware.auth())
 
 //post routes
-router.post('/posts', [PostsController, 'store']).middleware(middleware.auth())
+router
+  .group(() => {
+    router.post('/posts', [PostsController, 'store'])
+    router.get('/posts/:id/edit', [PostsController, 'edit'])
+    router.patch('/posts/:id', [PostsController, 'update'])
+    router.delete('/posts/:id', [PostsController, 'destroy'])
+  })
+  .middleware(middleware.auth())
