@@ -4,7 +4,7 @@
       {{ csrfField() }}
 
       <div>
-        <textarea class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" name="content" required rows="3" placeholder="Share an update...">
+        <textarea class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-teal-500 focus:ring-teal-500 disabled:opacity-50 disabled:pointer-events-none" name="content" required rows="3" placeholder="Share an update...">
           {{ old('content') || post.content }}
         </textarea>
 
@@ -14,7 +14,7 @@
       </div>
 
       <button
-        class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+        class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-teal-600 text-white hover:bg-teal-700 disabled:opacity-50 disabled:pointer-events-none">
         Save
       </button>
     </form>
