@@ -9,6 +9,7 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+const PostLikesController = () => import('../app/controllers/post_likes_controller.js')
 const FeedController = () => import('../app/controllers/feed_controller.js')
 const PostsController = () => import('../app/controllers/posts_controller.js')
 const AuthController = () => import('../app/controllers/auth_controller.js')
@@ -34,5 +35,8 @@ router
     router.get('/posts/:id/edit', [PostsController, 'edit'])
     router.patch('/posts/:id', [PostsController, 'update'])
     router.delete('/posts/:id', [PostsController, 'destroy'])
+    //likes
+    router.post('posts/:id/likes', [PostLikesController, 'store'])
+    router.delete('posts/:id/likes', [PostLikesController, 'destroy'])
   })
   .middleware(middleware.auth())
