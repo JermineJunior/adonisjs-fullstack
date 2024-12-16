@@ -6,6 +6,8 @@ export default class FeedController {
     const posts = await Post.query()
       .orderBy('created_at', 'desc')
       .preload('user')
+      .preload('comments')
+      .withCount('comments')
       .withCount('likes')
 
     return view.render('pages/home', { posts })

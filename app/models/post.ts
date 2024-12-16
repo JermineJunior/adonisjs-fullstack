@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, belongsTo, column, manyToMany } from '@adonisjs/lucid/orm'
+import { BaseModel, hasMany, belongsTo, column, manyToMany } from '@adonisjs/lucid/orm'
 import User from './user.js'
-import type { BelongsTo, ManyToMany } from '@adonisjs/lucid/types/relations'
+import type { BelongsTo, HasMany, ManyToMany } from '@adonisjs/lucid/types/relations'
+import Comment from './comment.js'
 
 export default class Post extends BaseModel {
   @column({ isPrimary: true })
@@ -26,4 +27,7 @@ export default class Post extends BaseModel {
     pivotTimestamps: true,
   })
   declare likes: ManyToMany<typeof User>
+
+  @hasMany(() => Comment)
+  declare comments: HasMany<typeof Comment>
 }
